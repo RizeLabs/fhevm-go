@@ -113,14 +113,11 @@ func InitGlobalKeysFromFiles(keysDir string) error {
 
 // initialize keys automatically only if FHEVM_GO_KEYS_DIR is set
 func init() {
-	var keysDirPath, present = os.LookupEnv("FHEVM_GO_KEYS_DIR")
-	if present {
-		err := InitGlobalKeysFromFiles(keysDirPath)
-		if err != nil {
-			panic(err)
-		}
-		fmt.Println("INFO: global keys are initialized automatically using FHEVM_GO_KEYS_DIR env variable")
-	} else {
-		fmt.Println("INFO: global keys aren't initialized automatically (FHEVM_GO_KEYS_DIR env variable not set)")
+	keysDirPath := "../kms/test-fhevm-keys"
+	// os.LookupEnv("FHEVM_GO_KEYS_DIR")
+	err := InitGlobalKeysFromFiles(keysDirPath)
+	if err != nil {
+		panic(err)
 	}
+	fmt.Println("INFO: global keys are initialized automatically using FHEVM_GO_KEYS_DIR env variable")
 }
